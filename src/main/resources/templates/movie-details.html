@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Details</title>
+</head>
+<body>
+    <h1>Movie Details</h1>
+    <div>
+        <h2>Title: <span th:text="${movie.title}"></span></h2>
+        <p>Release Year: <span th:text="${movie.releaseYear}"></span></p>
+        <p>Genre: <span th:text="${movie.genre}"></span></p>
+        <p>Director: <span th:text="${movie.director}"></span></p>
+        <p>Average Rating: <span th:text="${movie.averageRating}"></span></p>
+    </div>
+</body>
+</html>
