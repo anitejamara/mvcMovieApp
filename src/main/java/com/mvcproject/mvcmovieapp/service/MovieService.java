@@ -11,8 +11,8 @@ import java.util.Optional;
 @Service
 public class MovieService {
 
-    private final MovieRepository movieRepository;
-
+    private MovieRepository movieRepository;
+    
     @Autowired
     public MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
@@ -22,25 +22,25 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
-    public Optional<Movie> getMovieById(Long id) {
-        return movieRepository.findById(id);
+    public Movie getMovieById(Long id) {
+        Optional<Movie> movie = movieRepository.findById(id);
+        return movie.orElse(null);
     }
 
     public Movie addMovie(Movie movie) {
         return movieRepository.save(movie);
     }
 
-    public void deleteMovie(Long id) {
-        movieRepository.deleteById(id);
-    }
-
     public Movie updateMovie(Long id, Movie updatedMovie) {
-        Optional<Movie> optionalMovie = movieRepository.findById(id);
-        if (optionalMovie.isPresent()) {
-            Movie existingMovie = optionalMovie.get();
+        // private int releaseYear;
+        // private String genre;
+        // private String director;
+        // private double averageRating;
+        Movie existingMovie = getMovieById(id);
+        if (existingMovie != null) {
             existingMovie.setTitle(updatedMovie.getTitle());
-            existingMovie.setReleaseYear(updatedMovie.getReleaseYear());
             existingMovie.setGenre(updatedMovie.getGenre());
+            existingMovie.setReleaseYear(updatedMovie.getReleaseYear());
             existingMovie.setDirector(updatedMovie.getDirector());
             existingMovie.setAverageRating(updatedMovie.getAverageRating());
             return movieRepository.save(existingMovie);
@@ -48,5 +48,8 @@ public class MovieService {
             throw new IllegalArgumentException("Movie with ID " + id + " not found");
         }
     }
-}
 
+    public void deleteMovie(Long id) {
+        movieRepository.deleteById(id);
+    }
+}

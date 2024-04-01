@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Movie</title>
+    <style>
+        body {
+            background-color: #f0f0f063; /* Light gray background color */
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333; /* Dark gray heading color */
+        }
+        form {
+            background-color: #fff; /* White background color for form */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50; /* Green submit button */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049; /* Darker green hover color */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Edit Movie</h1>
+
+<form th:action="@{/movies/edit/{id}(id=${movie.id})}" method="post" th:object="${movie}">
+    <label>Title: <input type="text" th:field="*{title}" required/></label><br/>
+    <label>Release Year: <input type="number" th:field="*{releaseYear}" required/></label><br/>
+    <label>Genre: <input type="text" th:field="*{genre}" required/></label><br/>
+    <label>Director: <input type="text" th:field="*{director}" required/></label><br/>
+    <label>Average Rating: <input type="number" step="0.1" th:field="*{averageRating}" required/></label><br/>
+    <input type="submit" value="Update Movie"/>
+</form>
+
+
+
+</body>
+</html>

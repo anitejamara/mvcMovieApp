@@ -1,9 +1,12 @@
 package com.mvcproject.mvcmovieapp.model;
+// import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
+
+// import javax.persistence.Entity;
+// import javax.persistence.GeneratedValue;
+// import javax.persistence.GenerationType;
+// import javax.persistence.Id;
 
 @Entity
 public class Movie {
@@ -11,26 +14,28 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
-    private int releaseYear;
     private String genre;
     private String director;
+   
+    
+    @Column(name="releaseYear")
+    private int releaseYear;
+
+    @Column(name = "averageRating") 
     private double averageRating;
 
-    // Constructors
+
     public Movie() {
-        // Default constructor required by JPA
     }
 
-    public Movie(String title, int releaseYear, String genre, String director) {
-        this.title = title;
-        this.releaseYear = releaseYear;
-        this.genre = genre;
-        this.director = director;
-    }
-
-    // Getters and setters
+    public Movie(String title, int releaseYear, String genre, String director, double averageRating) {
+            this.title = title;
+            this.releaseYear = releaseYear;
+            this.genre = genre;
+            this.director = director;
+            this.averageRating = averageRating;
+        }
     public Long getId() {
         return id;
     }

@@ -20,7 +20,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'javax.persistence:javax.persistence-api:2.2' // Or the version compatible with your JPA provider
-	implementation 'mysql:mysql-connector-java:8.0.32' // Or the version compatible with your MySQL server
+    implementation 'mysql:mysql-connector-java:8.0.26' // MySQL dependency
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

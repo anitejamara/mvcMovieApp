@@ -1,30 +1,100 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Movie Catalog</title>
+    <title>Movies</title>
+    <style>
+        body {
+            background-color: #f0f0f063; /* Light gray background color */
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333; /* Dark gray heading color */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff; /* White background color */
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd3e; /* Light gray border */
+        }
+        th {
+            background-color: #f2f2f2; /* Light gray header background */
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Light gray background for even rows */
+        }
+        tr:hover {
+            background-color: #ddd; /* Darker gray background on hover */
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50; /* Green submit button */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049; /* Darker green hover color */
+        }
+    </style>
 </head>
 <body>
-    <h1>Movie Catalog</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Release Year</th>
-                <th>Genre</th>
-                <th>Director</th>
-                <th>Average Rating</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="movie : ${movies}">
-                <td th:text="${movie.title}"></td>
-                <td th:text="${movie.releaseYear}"></td>
-                <td th:text="${movie.genre}"></td>
-                <td th:text="${movie.director}"></td>
-                <td th:text="${movie.averageRating}"></td>
-            </tr>
-        </tbody>
-    </table>
+
+<h1>Movies</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Release Year</th>
+            <th>Genre</th>
+            <th>Director</th>
+            <th>Average Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="movie : ${movies}">
+            <td th:text="${movie.id}"></td>
+            <td th:text="${movie.title}"></td>
+            <td th:text="${movie.releaseYear}"></td>
+            <td th:text="${movie.genre}"></td>
+            <td th:text="${movie.director}"></td>
+            <td th:text="${movie.averageRating}"></td>
+            <td>
+                <a th:href="@{/movies/edit/{id}(id=${movie.id})}">Edit</a> |
+                <a th:href="@{/movies/delete/{id}(id=${movie.id})}" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Add Movie</h2>
+<form th:action="@{/movies}" method="post" th:object="${movie}">
+    <label>Title: <input type="text" th:field="*{title}" required/></label><br/>
+    <label>Release Year: <input type="number" th:field="*{releaseYear}" required/></label><br/>
+    <label>Genre: <input type="text" th:field="*{genre}" required/></label><br/>
+    <label>Director: <input type="text" th:field="*{director}" required/></label><br/>
+    <label>Average Rating: <input type="number" step="0.1" th:field="*{averageRating}" required/></label><br/>
+    
+    
+    <input type="submit" value="Add Movie"/>
+</form>
 </body>
 </html>
